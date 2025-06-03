@@ -1,7 +1,5 @@
 ---
-import { graphql } from '~/lib/datocms/graphql';
 import Layout from '../layouts/Layout.astro';
-import { TagFragment } from '~/lib/datocms/commonFragments';
 import { executeQuery } from '~/lib/datocms/executeQuery';
 import { StructuredText } from '@datocms/astro';
 
@@ -11,73 +9,12 @@ import { isDraftModeEnabled } from '~/lib/draftMode';
 import { DraftModeQueryListener } from '~/components/DraftModeQueryListener';
 
 import { PageInline } from '~/components/inlineRecord/PageInline';
-import { PageInlineFragment } from '~/components/inlineRecord/PageInline/fragments';
-
 import { PageLink } from '~/components/linkToRecord/PageLink';
-import { PageLinkFragment } from '~/components/linkToRecord/PageLink/fragments';
-
 import { VideoBlock } from '~/components/blocks/VideoBlock';
-import { VideoBlockFragment } from '~/components/blocks/VideoBlock/fragments';
-
 import { ImageBlock } from '~/components/blocks/ImageBlock';
-import { ImageBlockFragment } from '~/components/blocks/ImageBlock/fragments';
-
 import { ImageGalleryBlock } from '~/components/blocks/ImageGalleryBlock';
-import { ImageGalleryBlockFragment } from '~/components/blocks/ImageGalleryBlock/fragments';
 
-/**
- * The GraphQL query that will be executed for this route to generate the page
- * content and metadata.
- *
- * Thanks to gql.tada, the result will be fully typed!
- */
-const query = graphql(
-  /* GraphQL */ `
-    query BasicPageQuery {
-      page {
-        _seoMetaTags {
-          ...TagFragment
-        }
-        title
-        _firstPublishedAt
-        structuredText {
-          value
-          blocks {
-            ... on RecordInterface {
-              id
-              __typename
-            }
-            ... on ImageBlockRecord {
-              ...ImageBlockFragment
-            }
-            ... on ImageGalleryBlockRecord {
-              ...ImageGalleryBlockFragment
-            }
-            ... on VideoBlockRecord {
-              ...VideoBlockFragment
-            }
-          }
-          links {
-            ... on RecordInterface {
-              id
-              __typename
-            }
-            ...PageLinkFragment
-            ...PageInlineFragment
-          }
-        }
-      }
-    }
-  `,
-  [
-    TagFragment,
-    ImageBlockFragment,
-    ImageGalleryBlockFragment,
-    VideoBlockFragment,
-    PageLinkFragment,
-    PageInlineFragment,
-  ],
-);
+import { query } from './_graphql';
 
 const draftModeEnabled = isDraftModeEnabled(Astro.cookies);
 const { page } = await executeQuery(query, { includeDrafts: draftModeEnabled });
