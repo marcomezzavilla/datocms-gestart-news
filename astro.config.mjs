@@ -2,12 +2,16 @@ import { defineConfig, envField } from 'astro/config';
 
 import react from '@astrojs/react';
 
+import tailwindcss from '@tailwindcss/vite';
+
 // https://astro.build/config
 export default defineConfig({
   output: 'server',
+
   security: {
     checkOrigin: false,
   },
+
   env: {
     schema: {
       DATOCMS_PUBLISHED_CONTENT_CDA_TOKEN: envField.string({
@@ -37,5 +41,10 @@ export default defineConfig({
     },
     validateSecrets: true,
   },
+
   integrations: [react()],
+
+  vite: {
+    plugins: [tailwindcss()],
+  },
 });
