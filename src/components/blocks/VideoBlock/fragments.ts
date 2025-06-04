@@ -1,5 +1,5 @@
 import { graphql } from 'gql.tada';
-import { VideoPlayerFragment } from '~/components/VideoPlayer/fragments';
+// import { VideoPlayerFragment } from '~/components/VideoPlayer/fragments';
 
 /**
  * Let's define the GraphQL fragment needed for the component to function.
@@ -14,14 +14,15 @@ import { VideoPlayerFragment } from '~/components/VideoPlayer/fragments';
  * Learn more: https://gql-tada.0no.co/guides/fragment-colocation
  */
 
-export const VideoBlockFragment = graphql(
-  /* GraphQL */ `
-    fragment VideoBlockFragment on VideoBlockRecord {
-      asset {
-        title
-        ...VideoPlayerFragment
-      }
+export const VideoBlockFragment = graphql(/* GraphQL */ `
+  fragment VideoBlockFragment on VideoBlockRecord {
+    video {
+      url
+      width
+      height
+      provider
+      providerUid
     }
-  `,
-  [VideoPlayerFragment],
-);
+    description
+  }
+`);

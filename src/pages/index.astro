@@ -1,13 +1,19 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from '~/layouts/Layout.astro';
 import { executeQuery } from '~/lib/datocms/executeQuery';
+import { StructuredText } from '@datocms/astro';
 
 import { isDraftModeEnabled } from '~/lib/draftMode';
 import { DraftModeQueryListener } from '~/components/DraftModeQueryListener';
+const draftModeEnabled = isDraftModeEnabled(Astro.cookies);
 
 import { query } from './_graphql';
 
-const draftModeEnabled = isDraftModeEnabled(Astro.cookies);
+import { ImageBlock } from '~/components/blocks/ImageBlock';
+import { VideoBlock } from '~/components/blocks/VideoBlock';
+import { PageLink } from '~/components/linkToRecord/PageLink';
+import { PageInline } from '~/components/inlineRecord/BlogPageInline';
+
 const { page, changelogs } = await executeQuery(query, { includeDrafts: draftModeEnabled });
 
 if (!page || changelogs.length === 0) {
@@ -19,20 +25,35 @@ if (!page || changelogs.length === 0) {
 ---
 
 <Layout additionalSeo={page._seoMetaTags}>
-  <div class="bg-blue-400 p-4 text-white">
-    <h1 class="text-4xl text-center">Novità</h1>
-    <h2 class="text-2xl text-center">Aggiornamenti e nuove funzionalità di Gestart.net</h2>
+  <div class="bg-linear-to-b from-blue-500 to-blue-400 px-8 py-10 text-white">
+    <h1 class="text-4xl text-center font-bold mb-4">Novità</h1>
+    <h2 class="text-3xl text-center">Aggiornamenti e nuove funzionalità di Gestart.net</h2>
   </div>
 
-  <h1>{page.title}</h1>
-  {
-    changelogs.map((changelog) => (
-      <div>
-        <h2>{changelog.title}</h2>
-      </div>
-    ))
-  }
-  <footer>Published at {page._firstPublishedAt}</footer>
+  <div class="flex items-center flex-col mt-20 gap-12">
+    {
+      changelogs.map((item) => (
+        <article class="w-full max-w-3xl">
+          <a href={`/${item.slug}`}>
+            <h2 class="text-3xl font-bold mb-4">{item.title}</h2>
+          </a>
+          <StructuredText
+            data={item.body}
+            blockComponents={{
+              ImageBlockRecord: ImageBlock,
+              VideoBlockRecord: VideoBlock,
+            }}
+            linkToRecordComponents={{
+              PageRecord: PageLink,
+            }}
+            inlineRecordComponents={{
+              PageRecord: PageInline,
+            }}
+          />
+        </article>
+      ))
+    }
+  </div>
 
   <DraftModeQueryListener query={query} />
 </Layout>

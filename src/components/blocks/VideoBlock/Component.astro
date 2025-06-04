@@ -15,7 +15,7 @@ const unmaskedBlock = readFragment(VideoBlockFragment, block);
 
 <figure>
   {/* Render the video player component */}
-  <VideoPlayer data={unmaskedBlock.asset} />
+  <VideoPlayer data={unmaskedBlock.video} />
   {/* Display the title of the video asset below the video player */}
-  <figcaption>{unmaskedBlock.asset.title}</figcaption>
+  <figcaption>{unmaskedBlock.video.title}</figcaption>
 </figure>

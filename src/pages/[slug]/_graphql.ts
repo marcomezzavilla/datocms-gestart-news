@@ -13,18 +13,14 @@ import { DocPageInlineFragment } from '~/components/inlineRecord/DocPageInline/f
  */
 export const query = graphql(
   /* GraphQL */ `
-    query BasicPageQuery {
-      page: changelogPage {
+    query ChangelogItem($slug: String!) {
+      page: changelog(filter: { slug: { eq: $slug } }) {
         _seoMetaTags {
           ...TagFragment
         }
         title
-        _firstPublishedAt
-      }
-      changelogs: allChangelogs {
-        id
-        title
-        slug
+        abstract
+        createdAt
         body {
           value
           blocks {

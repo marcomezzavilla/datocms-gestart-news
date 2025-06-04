@@ -15,7 +15,7 @@ const unmaskedBlock = readFragment(ImageBlockFragment, block);
 
 <figure>
   {/* Display responsive image */}
-  <ResponsiveImage data={unmaskedBlock.asset.responsiveImage} />
+  <ResponsiveImage data={unmaskedBlock.image.responsiveImage!} />
   {/* Display image title */}
-  <figcaption>{unmaskedBlock.asset.title}</figcaption>
+  <figcaption>{unmaskedBlock.image.title}</figcaption>
 </figure>

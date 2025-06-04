@@ -31,20 +31,23 @@ const result = await executeQuery(query, { includeDrafts: draftModeEnabled });
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="h-full">
   <head>
     <meta charset="UTF-8" />
     <meta name="generator" content={Astro.generator} />
     <Seo data={[...result._site.faviconMetaTags, ...additionalSeo]} />
   </head>
-  <body>
-    <header>
-      <nav></nav>
+  <body class="flex flex-col h-full">
+    <header class="min-h-20 flex justify-between items-center text-2xl font-medium px-8">
+      <nav>Nav wip</nav>
+      <div>CTA wip</div>
     </header>
     <!-- <DraftModeToggler /> -->
 
-    <main>
+    <main class="flex-1 mb-12">
       <slot />
     </main>
+
+    <footer class="bg-[#003973] text-white p-8">Footer wip</footer>
   </body>
 </html>

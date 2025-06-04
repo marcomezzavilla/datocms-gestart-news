@@ -15,6 +15,7 @@ import { graphql } from '~/lib/datocms/graphql';
 
 export const VideoPlayerFragment = graphql(/* GraphQL */ `
   fragment VideoPlayerFragment on VideoFileField {
+    title
     video {
       # required: this field identifies the video to be played
       muxPlaybackId

@@ -1,0 +1,16 @@
+---
+import { readFragment, type FragmentOf } from '~/lib/datocms/graphql';
+import { DocPageInlineFragment } from './fragments';
+
+interface Props {
+  record: FragmentOf<typeof DocPageInlineFragment>;
+}
+
+const { record } = Astro.props;
+
+const unmaskedRecord = readFragment(DocPageInlineFragment, record);
+---
+
+<a href="/" class="pill">
+  {unmaskedRecord.title}
+</a>
