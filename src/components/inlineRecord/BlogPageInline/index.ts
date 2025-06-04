@@ -1,1 +1,1 @@
-export { default as PageInline } from './Component.astro';
+export { default as BlogPageInline } from './Component.astro';

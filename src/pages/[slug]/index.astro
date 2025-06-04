@@ -11,8 +11,8 @@ import { query } from './_graphql';
 
 import { ImageBlock } from '~/components/blocks/ImageBlock';
 import { VideoBlock } from '~/components/blocks/VideoBlock';
-import { PageLink } from '~/components/linkToRecord/PageLink';
-import { PageInline } from '~/components/inlineRecord/BlogPageInline';
+import { BlogPageInline } from '~/components/inlineRecord/BlogPageInline';
+import { DocPageInline } from '~/components/inlineRecord/DocPageInline';
 
 const variables = { slug: Astro.params.slug! };
 const { page } = await executeQuery(query, { variables, includeDrafts: draftModeEnabled });
@@ -41,11 +41,9 @@ if (!page) {
             ImageBlockRecord: ImageBlock,
             VideoBlockRecord: VideoBlock,
           }}
-          linkToRecordComponents={{
-            PageRecord: PageLink,
-          }}
           inlineRecordComponents={{
-            PageRecord: PageInline,
+            BlogPageRecord: BlogPageInline,
+            DocPageRecord: DocPageInline,
           }}
         />
       </article>

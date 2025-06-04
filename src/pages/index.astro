@@ -11,8 +11,8 @@ import { query } from './_graphql';
 
 import { ImageBlock } from '~/components/blocks/ImageBlock';
 import { VideoBlock } from '~/components/blocks/VideoBlock';
-import { PageLink } from '~/components/linkToRecord/PageLink';
-import { PageInline } from '~/components/inlineRecord/BlogPageInline';
+import { BlogPageInline } from '~/components/inlineRecord/BlogPageInline';
+import { DocPageInline } from '~/components/inlineRecord/DocPageInline';
 
 const { page, changelogs } = await executeQuery(query, { includeDrafts: draftModeEnabled });
 
@@ -43,11 +43,9 @@ if (!page || changelogs.length === 0) {
               ImageBlockRecord: ImageBlock,
               VideoBlockRecord: VideoBlock,
             }}
-            linkToRecordComponents={{
-              PageRecord: PageLink,
-            }}
             inlineRecordComponents={{
-              PageRecord: PageInline,
+              BlogPageRecord: BlogPageInline,
+              DocPageRecord: DocPageInline,
             }}
           />
         </article>

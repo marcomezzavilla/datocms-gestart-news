@@ -1,1 +1,1 @@
-export { default as PageInline } from './Component.astro';
+export { default as DocPageInline } from './Component.astro';

@@ -1,6 +1,5 @@
 ---
 import { type FragmentOf, readFragment } from '~/lib/datocms/graphql';
-import { VideoPlayer } from '~/components/VideoPlayer';
 import { VideoBlockFragment } from './fragments';
 
 interface Props {
@@ -10,12 +9,11 @@ interface Props {
 const { block } = Astro.props;
 
 // Read unmasked block from fragment
-const unmaskedBlock = readFragment(VideoBlockFragment, block);
+// const unmaskedBlock = readFragment(VideoBlockFragment, block);
 ---
 
 <figure>
-  {/* Render the video player component */}
-  <VideoPlayer data={unmaskedBlock.video} />
-  {/* Display the title of the video asset below the video player */}
-  <figcaption>{unmaskedBlock.video.title}</figcaption>
+  <div>
+    <!-- TODO -->
+  </div>
 </figure>
